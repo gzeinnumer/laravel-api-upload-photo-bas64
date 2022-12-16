@@ -19,8 +19,10 @@ class PhotoController extends BaseController
             $res = array();
                 
             foreach ($photos as $photo) {
-                $photoConfirmation = $this->processUpload($photo['path'], 'photo');
-                $res[] = $photoConfirmation['fotoName'];
+                if($photo['path']!= " ") {
+                    $photoConfirmation = $this->processUpload($photo['path'], 'photo');
+                    $res[] = $photoConfirmation['fotoName'];
+                }
             }
             DB::commit();
             return response()->json(['pesan' => $res, 'status' => true]);
